@@ -1,0 +1,69 @@
+<div ng-controller="BuyNow as vm">
+   <div class="row">
+       <div class="col-md-12">
+           <h4>{{vm.animal.name ? vm.animal.name : vm.animal.id }}</h4>
+           <p class="lead">
+               {{vm.animal.description}}
+           </p>
+
+          <div class="panel panel-primary">
+              <div class="panel-heading">Purchase Inquiry</div>
+              <div class="panel body">
+			  	<div class="row">
+				  	<div class="col-md-offset-1 col-md-7">
+		              <div class="alert alert-warning" role="alert">
+		                  <strong>NOTE:</strong>
+		                  <br/>
+		                  If you are interested in purchasing this animal, or need additional information, please contact us using the form below.  
+		                  If that doesn't work, you can also 
+                          <a href="mailto:sales@grreptile.com&subject=Purchase%20Inquiry%20for%20{{vm.animal.id}}">email us  here</a>.
+		              </div>					
+					  
+	                  <form class="form-horizontal" data-ng-submit="sendForm()" data-ng-controller="SendContactForm">
+	                     <div class="form-group">
+	                         <label for="tbAnimalId" class="col-sm-4">Animal ID</label>
+	                         <div class="col-sm-8">
+	                             <input type="text" class="form-control disabled" id="tbAnimalId" disabled value="{{vm.animal.id}}"></input>                             
+	                         </div>
+	                     </div>
+	                     <div class="form-group">
+	                         <label for="tbAnimalPrice" class="col-sm-4">Price</label>
+	                         <div class="col-sm-8">
+	                             <input type="text" class="form-control disabled" id="tbAnimalPrice" disabled 
+	                                 value="${{vm.animal.price}}{{vm.animal.includeShipping ? ' shipped' : ' plus shipping'}}"></input>                             
+	                         </div>
+	                     </div>
+	                      <div class="form-group row">
+	                          <label for="tbName" class="col-sm-4">Name</label>
+	                          <div class="col-sm-8">
+	                              <input type="text" class="form-control" id="tbName" ng-model="contact.name" ng-required="true">
+	                          </div>
+	                      </div>
+	                      <div class="form-group row">
+	                          <label for="tbEmail" class="col-sm-4">Email</label>
+	                          <div class="col-sm-8">
+	                              <input type="email" class="form-control" id="tbEmail" ng-model="contact.email" ng-required="true">
+	                          </div>
+	                      </div>
+	                      <div class="form-group">
+	                          <label for="tbComments" class="col-sm-4">Questions</label>
+	                          <div class="col-sm-8">
+	                              <textarea name="" class="form-control" id="tbComments" rows="3" ng-model="contact.comments"></textarea>
+	                          </div>
+	                      </div>
+	                      <div class="form-group">
+	                          <div class="col-sm-offset-4 col-sm-3">
+	                              <button class="btn btn-primary" type="submit">Submit</button>
+	                          </div>
+	                      </div>
+	                  </form>
+					</div>
+					<div class="col-md-3">
+						<img src="/images/bodypics/{{vm.animal.photos[0].filename}}.jpg" class="thumbnail photo img-responsive" alt="{{vm.animal.name}}" />
+					</div>
+				</div>
+              </div>
+          </div>
+       </div>
+   </div>
+</div>

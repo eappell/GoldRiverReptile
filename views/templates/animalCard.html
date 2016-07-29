@@ -1,0 +1,31 @@
+<div class="thumbnail collectionThumbs" thumbnail>
+    <div class="labels">
+        <span class="label label-danger" ng-show="snake.status == 'deceased'">DECEASED</span>
+        <span class="label label-primary" ng-show="snake.status == 'sold'">SOLD</span>
+        <span class="label label-warning" ng-show="snake.status == 'payments'">ON HOLD</span>
+        <span class="label label-info" ng-show="snake.status == 'feeding'">FEEDING HOLD</span>
+        <span class="label label-success" ng-show="snake.price > 0 && snake.status != 'payments' && snake.status != 'sold' && snake.status != 'Hold'&& snake.status != 'feeding'">AVAILABLE</span>
+    </div>
+    <div class="thumbhover">
+        <h4>{{snake.id}}</h4>
+        <p ng-bind-html="snake.shortDesc | to_trusted"></p>
+        <p class="bottom-aligned-text btn-group">
+            <a class="btn btn-primary btn-sm" ng-click="openLightboxModal($index)" href="/images/bodypics/{{snake.photos[0].filename}}.jpg" data-lightbox="{snake.id}">
+                <i class="fa fa-search-plus"></i> Zoom
+            </a>
+            <a class="btn btn-primary btn-sm" ui-sref="Detail({animalId: snake.id})">
+                <i class="fa fa-file-text-o"></i> Details
+            </a>
+        </p>
+    </div>
+    <img src="/images/bodypics/{{snake.photos[0].filename}}.jpg" class="photo img-responsive" alt="{{snake.photos[0].caption ? snake.photos[0].caption : snake.id}}">
+    <div class="caption">
+        <h4>
+            {{snake.name ? snake.name : snake.id}}
+        </h4>
+        <p class="animal-desc">
+           <i class="fa fa-{{snake.sex == 'male' ? 'mars' : snake.sex == 'female' ? 'venus' : 'genderless'}}"></i>
+            {{snake.species}} <span class="small">({{snake.speciesLatin}})</span>
+        </p>
+    </div>
+</div>

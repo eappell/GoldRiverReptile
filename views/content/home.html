@@ -1,0 +1,75 @@
+<h4>Who is Gold River Reptile?</h4>
+<p>We are, first and foremost, people who keep and love reptiles.  We focus our efforts on keeping and producing high-quality 
+    green tree pythons 
+    (<a href="http://en.wikipedia.org/wiki/Morelia_viridis" target="_blank" title="Morelia viridis Wikipedia Page" style="font-style:italic">Morelia viridis</a>).  
+    We offer our customers happy, healthy snakes, as well as top-notch customer service and post-sale support.  
+    For more details see our <a ui-sref="About()" title="About Us">About page</a>.</p>
+
+<div class="row" data-ng:controller="Home">
+    <div class="col-md-4">
+        <div thumbnail class='thumbnail'>
+            <div id="availCarousel">
+                <carousel data-interval="false" data-ride="carousel" ng-if="slides.length > 0">
+                    <slide ng-repeat="slide in slides" active="slide.active">
+                        <a href="#/Available{{slide.title ? '/' + slide.title : ''}}">
+                            <img ng-src="{{slide.image}}" style="margin:auto;">
+                            <div class="carousel-caption" ng-show="slide.price" tooltip="Purchase info">
+                              <h4>{{slide.title}}</h4>
+                              <p>
+                                  ${{slide.price}}
+                              </p>
+                            </div>
+                        </a>
+                    </slide>
+                </carousel>
+                <div ng-if="slides.length < 1">
+                    <img src="images/NoneAvail.jpg" alt="No animals available at this time." />
+                </div>
+            </div>
+            <div class="caption" ng-click="gotoAvailable()" style="cursor: pointer">
+                <h4>What's Available?</h4>
+                <p>We are proud to offer US captive-bred baby chondros, produced by us, on location.  Click here to see which babies we're making available from our recent pairings.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 hidden">
+        <a href="#/Available" thumbnail class='thumbnail' title="Available Babies">
+            <img alt="Box1" src="/images/bodypics/baby004.jpg" data-src="holder.js/100%x250/auto/industrial">
+            <div class="caption">
+                <h4>What's Available?</h4>
+                <p>We are proud to offer US captive-bred baby chondros, produced by us, on location.  Click here to see which babies we're making available from our recent pairings.</p>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-4">
+        <a href="#/Collection" thumbnail class='thumbnail' title="Our Collection">
+            <img alt="Box2" src="/images/bodypics/GRR1506/010.jpg" data-src="holder.js/100%x250/auto/industrial">
+            <div class="caption">
+                <h4>Our Animals</h4>
+                <p>These animals are why we do this, and we are honored to have the opportunity to work with such elegant creatures.  To see our entire collection, click here.</p>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-4">
+        <a href="#/FAQs" thumbnail class='thumbnail' title="Frequently Asked Questions">
+            <img alt="Box3" src="/images/bodypics/GRR2016/HatchingPic_01.jpg" data-src="holder.js/100%x250/auto/industrial">
+            <div class="caption">
+                <h4>Husbandry Tips</h4>
+                <p>How hot should your hot spot be?  How often should you feed your animal?  What type of prey item do we recommend?  Get helpful hints on the best practices for keeping green tree pythons here.</p>
+            </div>
+        </a>
+    </div>
+</div>
+
+<div class="row" data-ng:controller="Home">
+    <div class="col-md-offset-1 col-md-10 media">
+        <h1 class="pull-left">
+            <span class="fa fa-question-circle fa-lg"></span>
+        </h1>
+        <div class="media-body">
+            <h4 class="media-heading">Did you know?</h4>
+            <p data-ng-model="fact">{{fact}}</p>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,119 @@
+<script src="/js/jssorSlider/docs.min.js"></script>
+
+<style>
+    .imgThumb { width: 120px; cursor: pointer; }
+    #thumbs .thumbnail { margin-bottom: 1px; }
+    #thumbs .thumbnail:hover { background-color: #6b8e23; border-color: #999; }
+    #imgMain { max-width: 640px; }
+
+    @media (min-width: 769px) and (max-width: 1024px) {
+        #imgMain { max-width: 77%; }
+    }
+
+    @media (min-width: 321px) and (max-width: 768px) {
+        .imgThumb { width: 80px; cursor: pointer; }
+        #thumbs .thumbnail { margin-bottom: 1px; }
+        #thumbs .thumbnail:hover { background-color: #6b8e23; border-color: #999; }
+        #imgMain { max-width: 80%; }
+    }
+
+    @media (max-width: 320px) {
+        .imgThumb { width: 60px; cursor: pointer; }
+        #thumbs .thumbnail { margin-bottom: 1px; }
+        #thumbs .thumbnail:hover { background-color: #6b8e23; border-color: #999; }
+        #imgMain { max-width: 300px; }
+    }
+
+</style>
+
+<!--<div ng-show="!vm.IsInCollection(vm.animal.id)"><h4>Sorry, no animal matching that ID could be found.</h4></div>-->
+<div ng-controller="Detail as vm">
+    <meta property="title" content="Gold River Reptile: {{vm.animal.id}} Detail" />
+    <meta property="og:title" content="{{vm.animal.id}} Detail" />
+    <meta property="og:image" content="http://greptile.com/images/bodypics/{{vm.animal.photos[0].filename}}.jpg" />
+    <meta property="og:url" content="http://grreptile.com/#/Collection/{{vm.animal.id}}" />
+    <div class="small">{{vm.animal.species}} {{vm.animal.speciesLatin ? '(' + vm.animal.speciesLatin + ')' : ''}}</div>
+    <div>
+        <span class="label label-danger" ng-if="vm.animal.status == 'deceased'">DECEASED</span>
+        <span class="label label-success" ng-if="vm.animal.price > 0 && vm.animal.status == 'available'">AVAILABLE</span>
+        <span class="label label-warning" ng-if="vm.animal.status == 'payments'">ON HOLD</span>
+        <span class="label label-danger" ng-if="vm.animal.status == 'sold'">SOLD</span>
+        <span class="label label-info" ng-if="vm.animal.status == 'feeding'">FEEDING HOLD</span>
+    </div>
+    <h4>
+        <i class="fa fa-{{vm.animal.sex == 'male' ? 'mars' : vm.animal.sex == 'female' ? 'venus' : 'genderless'}}"></i>
+        {{vm.animal.id}}
+    </h4>
+    <p class="lead" ng-bind-html="vm.animal.description | to_trusted"></p>
+    <div class="row">
+        <div class="col-md-3">
+            <label>Hatched On: </label> {{vm.animal.dob | date: 'mediumDate'}}<br/>
+            <label>Pedigree: </label> {{vm.animal.pedigree}}<br/>
+            <div ng-switch="!!{{vm.animal.motherInCollection}}">
+                <label>Mother: </label>
+                <a ng-switch-when="true" ui-sref="Detail({animalId: vm.animal.motherId})" tooltip="Dam Details">
+                    {{vm.animal.motherId != '' ? vm.animal.motherId : 'unknown'}}
+                </a>
+                <span ng-switch-when="false">{{vm.animal.motherId != '' ? vm.animal.motherId : 'unknown'}}</span>
+            </div>
+            <div ng-switch="!!{{vm.animal.fatherInCollection}}">
+                <label>Father: </label>
+                <a ng-switch-when="true" ui-sref="Detail({animalId: vm.animal.fatherId})" tooltip="Sire Details">
+                    {{vm.animal.fatherId != '' ? vm.animal.fatherId : 'unknown'}}
+                </a>
+                <span ng-switch-when="false">{{vm.animal.fatherId != '' ? vm.animal.fatherId : 'unknown'}}</span>
+            </div>
+            <div ng-show="vm.animal.pairingUrl">
+                <label><a href="{{vm.animal.pairingUrl}}" target="_blank">Project Link</a></label><br/>
+            </div>
+            <div ng-show="vm.animal.productOfProject">
+                <label>Project: </label> <a class="label label-primary" ui-sref="Project({projectId: vm.animal.productOfProject})" tooltip-placement="top" tooltip="Project Details">{{vm.animal.productOfProject}}</a><br/>
+            </div>
+            <div class="row" ng-show="vm.animal.projects.length > 0">
+                <label class="col-md-2">Projects: </label>
+                <div class="col-md-offset-1 col-md-8">
+                    <div ng-repeat="project in vm.animal.projects">
+                        <a class="label label-primary" ui-sref="Project({projectId: project.id})">{{project.id}}</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row" ng-show="vm.isBaby">
+                <label class="col-md-2">Feeding: </label>
+                <div class="col-md-offset-1 col-md-8">
+                    {{vm.animal.takenMeal ? vm.animal.fullPinkiesTaken + ' pinkies taken' : 'Not eating yet'}}
+                </div>
+            </div>
+            <div class="row" ng-show="vm.animal.price > 0 && vm.animal.status == 'available'">
+                <div class="col-md-7">
+<!--                    <h4><span class="label label-success">${{vm.animal.price}}</span></h4>-->
+                    <h4>
+                        ${{vm.animal.price}}
+                        <div class="small" ng-show="{{vm.animal.includeShipping}}">shipped </div>
+                        <div class="small" ng-show="{{!vm.animal.includeShipping}}">plus shipping </div>
+                    </h4>
+                    <div>
+                        <a ui-sref="BuyNow({animalId: vm.animal.id})" class="btn btn-primary btn-lg">Buy Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="fb-share-button" data-href="http://grreptile.com/#/Detail/{{vm.animal.id}}" data-layout="button"></div>
+        </div>
+        <div class="col-md-7">
+                    
+            <div thumbnail class="thumbnail">
+                <div id="detailCarousel">
+                    <div uib-carousel active="active" interval="vm.myInterval" no-wrap="noWrapSlides" no-transition="false">
+                        <div uib-slide ng-repeat="photo in vm.slides track by photo.id" index="photo.id">
+                            <a href="{{photo.image}}" data-lightbox="{{vm.animal.id}}" data-title="{{photo.caption}}">
+                                <img ng-src="{{photo.image}}" style="margin:auto;" tooltip data-container="body" title="Click to zoom" alt="{{photo.caption ? photo.caption : photo.filename}}" ng-click="openLightboxModal($index)">
+                            </a>
+                            <div class="carousel-caption">
+                                <h4>{{photo.caption ? photo.caption : vm.animal.name ? vm.animal.name : vm.animal.id}}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

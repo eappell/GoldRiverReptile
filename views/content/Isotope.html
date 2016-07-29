@@ -1,0 +1,114 @@
+<meta property="og:url" content="http://grreptile.com/#/Collection" />
+<div class="container" ng-controller="Collection as vm">
+    <div class="row row-centered">
+        <div class="col-md-12 col-centered">
+           <p>
+                We started with one little Dumerils Boa named Dewey.  Through the years our collection has grown,
+                and shrunk a little as we figured out which species we enjoyed working with, and some that we didn't.
+                We are very proud that our collection represents exellent examples of the species, and are all very well
+                cared for.
+            </p>
+            <p>
+                As you can see from the collection below, we have focused primarily on Green Tree Pythons (Morelia viridis).
+                Among the many beautiful localities of Green Tree Pythons, we have acquired excellent examples of the Arfak,
+                Biak, and Jayapura locales, as well as outcrosses of those localities.  We have focused the majority of our
+                collection on "designer" specimens exhibiting a high degree of yellow pigmentation into adulthood.  We have
+                always tried to acquire animals from high quality, proven breeders, whose pedigree has been traced back
+                to some of the earliest chondros brought into the US.  As a result, we have some spectacular adult chondros
+                which we are honored to have the opportunity to work with.
+            </p>
+            <p>
+                Below you will find our collection of all animals we have in our posession at this time.  You use the buttons
+                above the grid to sort, and filter the collection to your specific interest.
+            </p>
+        </div>
+    </div>
+
+    <div class="row">&nbsp;</div>
+
+    <div class="row row-centered">
+        <div class="col-md-4 col-centered">
+            <label>Order By:</label>
+            <div class="btn-group" data-toggle="buttons">
+                <label class="btn btn-default active" ng-click="order = ''">
+                    <input type="radio" checked=""> Default
+                </label>
+                <label class="btn btn-default" ng-click="order = 'name'">
+                    <input type="radio"> Name
+                </label>
+                <label class="btn btn-default" ng-click="order = 'id'">
+                    <input type="radio"> ID
+                </label>
+                <label class="btn btn-default" ng-click="order = 'species'">
+                    <input type="radio"> Species
+                </label>
+            </div>
+        </div>
+        <div class="col-md-7 col-centered">
+            <label>Show Only:</label>
+            <div class="btn-group" data-toggle="buttons">
+                <label class="btn btn-default active" ng-click="SelectedAnimalType = { value: ''}">
+                    <input type="radio" checked=""> All
+                </label>
+                <label class="btn btn-default" ng-click="SelectedAnimalType = { value: 'male'}">
+                    <input type="radio"> Males
+                </label>
+                <label class="btn btn-default" ng-click="SelectedAnimalType = { value: 'female'}">
+                    <input type="radio"> Females
+                </label>
+                <label class="btn btn-default" ng-click="SelectedAnimalType = { value: 'adult'}">
+                    <input type="radio"> Adults
+                </label>
+                <label class="btn btn-default" ng-click="SelectedAnimalType = { value: 'baby'}">
+                    <input type="radio"> Babies
+                </label>
+                <label class="btn btn-default" ng-click="SelectedAnimalType = { value: 'gtp'}">
+                    <input type="radio"> Chondros
+                </label>
+                <label class="btn btn-default" ng-click="SelectedAnimalType = { value: 'otherSnake'}">
+                    <input type="radio"> Other Snakes
+                </label>
+            </div>
+       </div>
+    </div>
+
+    <div class="row">&nbsp;</div>
+
+    <ul class="grid" masonry>
+        <li ng-repeat="snake in vm.collection | AnimalType: SelectedAnimalType | orderBy: order" ng-if="snake.status != 'deceased' && snake.status != 'sold'">
+            <div thumbnail class="thumbnail collectionThumbs">
+                <div class="labels">
+                    <span class="label label-danger" ng-show="snake.status == 'deceased'">DECEASED</span>
+                    <span class="label label-primary" ng-show="snake.status == 'sold'">SOLD</span>
+                    <span class="label label-warning" ng-show="snake.status == 'payments'">ON HOLD</span>
+                    <span class="label label-info" ng-show="snake.status == 'feeding'">FEEDING HOLD</span>
+                    <span class="label label-success" ng-show="snake.price > 0 && snake.status != 'payments' && snake.status != 'sold'">AVAILABLE</span>
+                </div>
+                <a ui-sref="Detail({animalId: snake.id})">
+                    <div class="thumbhover">
+                        <p>
+                            {{snake.description}}
+
+                            <div class="fb-share-button"
+                                 data-href="http://grreptile.com/images/bodypics/{{snake.photos[0].filename}}.jpg" data-layout="button"></div>
+                        </p>
+                       <p class="bottom-aligned-text small">click for details</p>
+                    </div>
+                </a>
+                <img src="/images/bodypics/{{snake.photos[0].filename}}.jpg" class="photo img-responsive" alt="{{snake.photos[0].caption ? snake.photos[0].caption : snake.id}}">
+                <div class="caption">
+                    <h4>
+                        {{snake.name ? snake.name : snake.id}}
+                    </h4>
+                    <p class="animal-desc">
+                       <i class="fa fa-{{snake.sex == 'male' ? 'mars' : snake.sex == 'female' ? 'venus' : 'genderless'}}"></i>
+                        {{snake.species}} <span class="small">({{snake.speciesLatin}})</span>
+                    </p>
+                </div>
+            </div>
+        </li>
+    </ul>
+
+</div>
+
+<script src="/js/holder.js"></script>

@@ -1,0 +1,37 @@
+{
+  "name": "grr",
+  "version": "1.0.0",
+  "description": "Website for Gold River Reptile",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "keywords": [
+    "web",
+    "reptile",
+    "snake",
+    "chondro"
+  ],
+  "author": "Eddie Appell",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eappell/GoldRiverReptile.git"
+  },
+  "dependencies": {
+    "angular": "^1.5.8",
+    "angular-animate": "^1.5.8",
+    "angular-bootstrap-lightbox": "^0.12.0",
+    "angular-moment": "^1.0.0-beta.6",
+    "angular-route": "^1.5.8",
+    "angular-sanitize": "^1.5.8",
+    "angular-toastr": "^2.0.0",
+    "angular-ui-bootstrap": "^2.0.0",
+    "angular-ui-router": "^0.3.1",
+    "bootstrap": "^3.3.7",
+    "font-awesome": "^4.6.3",
+    "jquery": "^2.2.4",
+    "lightbox": "^0.5.0",
+    "toastr": "^2.1.2"
+  }
+}

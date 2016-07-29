@@ -1,0 +1,71 @@
+<meta property="og:url" content="http://grreptile.com/#/dbCollection" />
+<div class="container" ng-controller="Collection as vm">
+    <div class="row row-centered">
+        <div class="col-md-12 col-centered">
+           <p>
+                We started with one little Dumerils Boa named Dewey.  Through the years our collection has grown,
+                and shrunk a little as we figured out which species we enjoyed working with, and some that we didn't.
+                We are very proud that our collection represents exellent examples of the species, and are all very well cared for.
+            </p>
+        </div>
+    </div>
+
+    <div class="row">&nbsp;</div>
+
+    <div class="row row-centered">
+        <div class="col-md-4 col-centered">
+            <label>Order By:</label>
+            <div class="btn-group" data-toggle="buttons">
+                <label class="btn btn-default active" ng-click="order = ''">
+                    <input type="radio" checked=""> Default
+                </label>
+                <label class="btn btn-default" ng-click="order = 'name'">
+                    <input type="radio"> Name
+                </label>
+                <label class="btn btn-default" ng-click="order = 'id'">
+                    <input type="radio"> ID
+                </label>
+                <label class="btn btn-default" ng-click="order = 'species'">
+                    <input type="radio"> Species
+                </label>
+            </div>
+        </div>
+        <div class="col-md-7 col-centered">
+            <label>Show Only:</label>
+            <div class="btn-group" data-toggle="buttons">
+                <label class="btn btn-default active" ng-click="SelectedAnimalType = { value: ''}">
+                    <input type="radio" checked=""> All
+                </label>
+                <label class="btn btn-default" ng-click="SelectedAnimalType = { value: 'male'}">
+                    <input type="radio"> Males
+                </label>
+                <label class="btn btn-default" ng-click="SelectedAnimalType = { value: 'female'}">
+                    <input type="radio"> Females
+                </label>
+                <label class="btn btn-default" ng-click="SelectedAnimalType = { value: 'adult'}">
+                    <input type="radio"> Adults
+                </label>
+                <label class="btn btn-default" ng-click="SelectedAnimalType = { value: 'baby'}">
+                    <input type="radio"> Babies
+                </label>
+                <label class="btn btn-default" ng-click="SelectedAnimalType = { value: 'gtp'}">
+                    <input type="radio"> Chondros
+                </label>
+                <label class="btn btn-default" ng-click="SelectedAnimalType = { value: 'otherSnake'}">
+                    <input type="radio"> Other Snakes
+                </label>
+            </div>
+       </div>
+    </div>
+
+    <div class="row">&nbsp;</div>
+
+    <ul class="grid" masonry>
+        <li ng-repeat="snake in vm.dbCollection | AnimalType: SelectedAnimalType | orderBy: order" ng-if="snake.Status != 'deceased' && snake.Status != 'sold'">
+            <animal-card animal="snake"></animal-card>
+        </li>
+    </ul>
+
+</div>
+
+<script src="/js/holder.js"></script>

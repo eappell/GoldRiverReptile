@@ -1,0 +1,36 @@
+<div ng-controller="Project as vm">
+    <meta property="og:title" content="Project Detail: {{vm.project.dam.id}} x {{vm.project.sire.id}}" />
+    <meta property="og:url" content="http://grreptile.com/#/Project/{{vm.project.id}}" />
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <h4>
+                    Please select an animal from those listed below marked "AVAILABLE".  Note that all prices include overnight shipping, with live arrival guarantee.  Detailed terms and conditions <a ui-sref="Terms()">can be found here</a>.
+                </h4>
+            </div>
+        </div>
+        <div class="row">
+            <!-- LEFT PANEL -->
+            <div class="col-md-8">
+                <div class="row">
+                    <sire-dam-info project="vm.project"></sire-dam-info>
+                </div>
+            </div>
+            <!-- RIGHT PANEL -->
+            <div class="col-md-4">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <project-info project="vm.project"></project-info>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <offspring-print project="vm.project"></offspring-print>
+            </div>
+        </div>
+    </div>

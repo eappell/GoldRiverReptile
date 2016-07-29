@@ -1,0 +1,46 @@
+<meta property="og:url" content="http://grreptile.com/#/Projects" />
+   <p class="lead">
+    We're very excited about the potential of our 2016 pairings!  Check back here often for status updates and photos of babies as they hatch out.
+</p>
+
+<div class="container-fluid" ng-controller="Projects as vm">
+    <ul class="grid" masonry>
+        <li ng-repeat="project in vm.projects">
+		   <div thumbnail class='thumbnail'>
+			   <a ui-sref="Project({projectId: project.id})">
+				   <div class="thumbhover">
+					   <p>
+						   {{project.shortDescription}}
+					   </p>
+						<p class="bottom-aligned-text small btn btn-sm btn-primary">
+							click for project details
+						</p>
+				   </div>
+			   </a>
+			   <img src="/images/bodypics/{{project.photos[0].filename}}.jpg" class="photo" alt="{{project.photos[0].caption ? project.photos[0].caption : project.id}}">
+			   <div class="caption">
+				   <h4>
+						   {{project.dam.name}} x {{project.sire.name}}
+						<span ng-if="project.eggs.hatched > 0"> ({{project.eggs.hatched}} hatched)</span>
+					</h4>
+					   <div>
+						   <span class="label label-primary" ng-if="!project.isComplete">IN PROGRESS NOW</span>
+						   <span class="label label-danger" ng-if="project.isComplete && project.eggs.count < 1">ENDED</span>
+						   <span class="label label-success" ng-if="project.isComplete && project.eggs.count > 0">COMPLETED {{project.dateEnd | date: 'yyyy'}}</span>
+					</div>
+			   </div>
+		   </div>
+		</li>
+		</ul>
+       <div class="col-sm-4 col-md-4 hidden">
+           <h4>Completed Projects</h4>
+           <div class="list-group">
+               <a href="#/Project/{{project.id}}" class="list-group-item" ng-repeat="project in vm.projects | filter: {isComplete:true}">
+                <h4 class="list-group-item-heading">{{project.id}}</h4>
+               </a>
+           </div>
+       </div>
+   </div>
+</div>
+
+<script src="/js/holder.js"></script>

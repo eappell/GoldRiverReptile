@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html ng-app="grr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Keeper and breeder of high quality green tree pythons.
+                                      We offer our customers happy, healthy snakes and geckos,
+                                      as well as top-notch customer service and post-sale support.">
+
+    <meta name="author" content="Ed Appell">
+    <title>Gold River Reptile</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<!--    <link rel="stylesheet" href="/css/font-awesome.min.css">-->
+    <link rel="stylesheet" href="/fonts/shortcut/stylesheet.css">
+    <link rel="stylesheet" href="/fonts/dirtyEgo/stylesheet.css">
+    <link rel="stylesheet" href="/fonts/heavyweight/stylesheet.css">
+    <link rel="stylesheet" href="/fonts/franchise/stylesheet.css">
+    <link rel="stylesheet" href="/fonts/bebas/stylesheet.css">
+<!--    <link rel="stylesheet" href="/css/anim-in-out.css">-->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/toastr.min.css">
+    <link rel="stylesheet" href="/css/backTop.css">
+    <link rel="stylesheet" href="/css/angular-bootstrap-lightbox.min.css">
+
+    <link rel="shortcut icon" href="/favicon3.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon3.ico" type="image/x-icon">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    </head>
+
+<body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+
+            <div class="collapse navbar-collapse nav-start">
+               <ul class="nav navbar-nav navbar-right navbar-icons">
+                    <li>
+                        <a href="https://www.facebook.com/grreptile" target="_blank" class="fa fa-facebook-official" tooltip-placement="bottom" tooltip="Facebook"></a>
+                    </li>
+                    <li>
+                        <a href="https://twitter.com/GoldRivrReptile" target="_blank" class="fa fa-twitter" tooltip-placement="bottom" tooltip="Twitter"></a>
+                    </li>
+                    <li>
+                        <a href="https://www.pinterest.com/GoldRivrReptile/" target="_blank" class="fa fa-pinterest" tooltip-placement="bottom" tooltip="Pinterest"></a>
+                    </li>
+                    <li>
+                        <a href="http://instagram.com/goldriverreptile?ref=badge" target="_blank" class="fa fa-instagram" tooltip-placement="bottom" tooltip="Instagram"></a>
+                    </li>
+               </ul>
+                <ul class="nav navbar-nav navbar-left" ui-view="nav">
+                    <li class="active"><a ui-sref="home">Home</a></li>
+                    <li><a ui-sref="Collection">Collection</a></li>
+                    <li><a ui-sref="Projects">Projects</a></li>
+                    <li><a ui-sref="Available">Available</a></li>
+                    <li><a ui-sref="About">About</a></li>
+                </ul>
+            </div><!--.nav-collapse -->
+            <a ui-sref="home"><img src="images/Logo2015_240.png" data-src="/images/Logo2015_240.png" alt="Gold River Reptile" class="logo img-responsive" /></a>
+        </div>
+        <div class="shrink-title hidden"></div>
+    </nav>
+
+   <div id="slider" ui-view="slider"></div>
+
+    <div class="container" id="rowBody">
+        <div class="row body">
+            <div class="col-md-12">
+                <div class="content">
+                    <div class="title subpage-title" ui-view="title"></div>
+                    <div ui-view="content"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid" id="footer" ui-view="footer">
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/3.3.1/masonry.pkgd.min.js"></script>
+    <script src="https://rawgit.com/desandro/imagesloaded/master/imagesloaded.pkgd.min.js"></script>-->
+    <!--<script src="//cdnjs.cloudflare.com/ajax/libs/masonry/2.1.08/jquery.masonry.min.js"></script>-->
+
+    <!-- Angular -->
+    <script src="/js/angular.min.js"></script>
+    <script src="/js/angular-animate.min.js"></script>
+    <script src="/js/angular-sanitize.min.js"></script>
+    <script src="/js/angular-resource.min.js"></script>
+    <!-- UI-Router -->
+    <script src="/js/angular-ui-router.min.js"></script>
+<!--    <script src="/js/anim-in-out.js"></script>-->
+    <!-- Angular UI Bootstrap -->
+    <script src="/js/ui-bootstrap-tpls-0.13.0.min.js"></script>
+
+    <script src="/js/jquery.backTop.min.js"></script>
+    <script src="/js/toastr.min.js"></script>
+    <script src="/js/moment.min.js"></script>
+    <script src="/js/angular-moment.min.js"></script>
+    <script src="/js/vendors/angular-bootstrap-lightbox.min.js"></script>
+
+    <!--<script src="/app/masonryDirective.js"></script>-->
+    <script src="/app/app.js"></script>
+    <script src="/app/about.js"></script>
+    <script src="/app/available.js"></script>
+    <!--<script src="/app/collection.js"></script>-->
+    <script src="/app/collection2.js"></script>
+    <script src="/app/detail.js"></script>
+    <script src="/app/faqs.js"></script>
+    <script src="/app/buynow.js"></script>
+    <script src="/app/projects.js"></script>
+    <script src="/app/project.js"></script>
+    <script src="/app/events.js"></script>
+    <script src="/app/authCtrl.js"></script>
+    <script src="/app/userAccount.js"></script>
+    <script src="/js/holder.js"></script>
+
+    <script>
+        var options = {
+            offset: '#rowBody',
+            classes: {
+                stick: 'nav-stick'
+            }
+        };
+
+        var bannerHeight = 200;
+
+        var isMobileWide = $('.logo').css('width') == '128px';
+        var isMobile = $('.logo').css('width') == '96px';
+
+        $(document).ready(function(){
+            $(document).on("scroll", function() {
+                var isHome = window.location.hash == '' || window.location.hash == '#/Home';
+                bannerHeight = isHome ? isMobileWide ? 220 : isMobile ? 145 : 450 : isMobileWide || isMobile ? 100 : 120;
+                if ($(document).scrollTop() > bannerHeight) {
+                    $('.subpage-title').addClass('shrink');
+                    $(".nav-start").addClass("small");
+                    $("#banner").addClass("small");
+                    $("#banner").css('height',isMobile || isMobileWide ? '115px' : '73px');
+                    $('nav img').addClass('shrink');
+                    $('nav').addClass('shrink');
+                    $('.navbar-nav').css('margin-top','0');
+                    $('ul.navbar-nav').removeAttr('style');
+                    if(!isHome) $('#rowBody').addClass('shrink');
+                } else {
+                    $('.subpage-title').removeClass('shrink');
+                    $('.shrink .shrink-title').remove();
+                    $(".nav-start").removeClass("small");
+                    $("#banner").removeClass("small");
+                    $("#banner").css('height',isMobile || isMobileWide ? '145px' : '202px');
+                    $('nav img').removeClass('shrink');
+                    $('nav').removeClass('shrink');
+                    $('.navbar-nav').css('margin-top',isMobile || isMobileWide ? '0' : '50px');
+                    if(!isHome) $('#rowBody').removeClass('shrink');
+                }
+            });
+
+            (function(d, s, id){
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) {return;}
+                js = d.createElement(s); js.id = id;
+                js.src = "//connect.facebook.net/en_US/sdk.js";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+
+            $(document).on('click','.navbar-collapse.in',function(e) {
+                if( $(e.target).is('a') && ( $(e.target).attr('class') != 'dropdown-toggle' ) ) {
+                    $(this).collapse('hide');
+                }
+            });
+
+            $('#backTop').backTop({
+                'position' : 400,
+                'speed' : 500,
+                'color' : 'white',
+            });
+        });
+    </script>
+    <a id="backTop" tooltip="Back to top">Back To Top</a>
+</body>
+</html>

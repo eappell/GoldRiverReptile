@@ -1,0 +1,61 @@
+<meta property="og:url" content="http://grreptile.com/#/Collection" />
+   <p>
+    We started with one little Dumerils Boa named Dewey.  Through the years our collection has grown,
+    and shrunk a little, as we figured out which species we enjoyed working with most, and found out that there
+    were some that we didn't want to work with at all.
+    We are very proud that our collection represents exellent examples of the species, and are all very well cared for.
+</p>
+
+<div class="container" ng-controller="Collection as vm">
+    <div class="row form-inline hidden">
+        <div class="col-md-offset-2 form-group">
+            <label class="form-label">Sex</label>
+            <select class="form-control" ng-model="filter.sex">
+                <option value="">Show Only: (ALL)</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="unknown">Unknown</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-label">Species</label>
+            <select class="form-control" ng-model="filter.species">
+                <option value="">Show Only: (ALL)</option>
+                <option value="Green Tree Python">Green Tree Pythons</option>
+                <option value="Crested Gecko">Crested Geckos</option>
+                <option value="Black Milk Snake">Black Milk Snake</option>
+                <option value="Dumeril\'s Boa">Dumeril's Boa</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-label">Age</label>
+            <select class="form-control" ng-model="filter.age">
+                <option value="">Show Only: (ALL)</option>
+                <option value="5,30">Adults</option>
+                <option value="3,4">Juveniles</option>
+                <option value="0,2">Babies</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <a class="btn btn-primary">Reset (Show All)</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+            <select class="form-control" ng-model="SelectedAnimalType" ng-options="type.name for type in vm.animalTypes track by type.value">
+                <option value="">Show Only: (ALL)</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="row">&nbsp;</div>
+
+    <div class="row" masonry="true" masonry><!-- filter { sex: filter.sex, species: filter.species } |  -->
+        <div ng-repeat="snake in collection | orderBy: ['-species','sex','dob','name','id'] | AnimalType: SelectedAnimalType"
+             class="repeat-animation hide-fade">
+             <animal-card></animal-card>
+        </div>
+    </div>
+</div>
+
+<script src="/js/holder.js"></script>

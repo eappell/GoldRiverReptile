@@ -1,0 +1,28 @@
+<div ng-controller="FAQs as vm">
+	<p>
+	    We get many questions from our customers.  If you have a questions that we haven't answered below, please don't hesitate to ask us!
+	</p>
+
+    <button ng-repeat="faq in vm.faqs" uib-popover="{{faq.a}}" popover-trigger="'click'" type="button" class="btn btn-default">{{faq.q}}</button>
+
+	<!--<div uib-accordion close-others="vm.oneAtATime">
+		<div uib-accordion-group ng-repeat="faq in vm.faqs" is-open="status.open" class="panel-default">
+            <div uib-accordion-heading>
+                {{faq.q}} <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+            </div>
+			{{faq.a}}
+		</div>
+	</div>	-->
+<!-- 	<div class="panel panel-default" ng-repeat="faq in vm.faqs">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+		  <a href="#" ng-click="vm.isCollapsed = !vm.isCollapsed">{{faq.q}}</a>          
+      </h4>
+    </div>
+    <div collapse="{{vm.isCollapsed}}">
+		<div class="panel-body">
+	  		{{faq.a}}
+		</div>
+    </div>
+</div> -->	
+</div>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html ng-app="grr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Gold River Reptile">
+        <meta name="author" content="Ed Appell">
+        <title>Gold River Reptile</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    </head>
+
+    <body>
+
+        <div class="container">
+            <h2>Animals:</h2>
+            <div class="row" id="testDiv"></div>
+        </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                var url = 'http://api.herptracker.com/odata/Animals';
+                var animals = [];
+
+                $.getJSON(url, null, function(data){
+                    if(data.value.length > 0){
+                        $(data.value).each(function(index, item) {
+                            animals.push(item);
+                            $("#testDiv").append($("<div/>", {'class': 'col-md-2', text: item.TrackingId}));
+                        });
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>

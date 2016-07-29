@@ -1,0 +1,40 @@
+<div ng-controller="Project as vm">
+    <meta property="og:title" content="Project Detail: {{vm.project.dam.id}} x {{vm.project.sire.id}}" />
+    <meta property="og:url" content="http://grreptile.com/#/Project/{{vm.project.id}}" />
+    <div class="lead" ng-bind-html="vm.project.description | to_trusted"></div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- LEFT PANEL -->
+            <div class="col-md-8">
+                <div class="row">
+
+                    <sire-dam-info project="vm.project"></sire-dam-info>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <hatch-countdown project="vm.project" days="52"></hatch-countdown>
+
+                        <offspring-listing project="vm.project"></offspring-listing>
+
+                    </div>
+                </div>
+            </div>
+            <!-- RIGHT PANEL -->
+            <div class="col-md-4">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+
+                            <project-info project="vm.project"></project-info>
+
+                            <breeding-events project="vm.project"></breeding-events>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

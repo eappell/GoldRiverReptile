@@ -1,0 +1,20 @@
+<ul class="event-list">
+    <li ng-repeat="event in vm.project.events" data-img="{{ event.photo != '' ? '' + event.photo + '' : 'none' }}">
+        <time datetime="{{event.date}}" ng-style="{ 'background': event.photo != '' ? 'url(' + event.photo + ')' : '#16254e', 'background-size': event.photo != '' ? 'cover' : 'inital' }">
+            <span class="day">{{event.date | date : 'd' }}</span>
+            <span class="month">{{event.date | date : 'MMM' }}</span>
+            <span class="year">{{event.date | date : 'yyyy' }}</span>
+            <span class="time">ALL DAY</span>
+        </time>
+        <!--<img src="{{event.photo}}" alt="{{event.title}}" ng-if="event.photo != ''" />-->
+        <div class="info">
+            <h2 class="title" ng-if="event.photo">
+                <a class="darkLink" href="{{event.photo}}" data-lightbox="{{vm.project.id}}" data-title="{{event.date + ': ' + event.title}}" data-toggle="tooltip" data-placement="top" title="Click for photo">
+                    {{event.title}}
+                </a>
+            </h2>
+            <h2 class="title" ng-if="!event.photo">{{event.title}}</h2>
+            <p class="desc">{{event.description}}</p>
+        </div>
+    </li>
+</ul>

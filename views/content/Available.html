@@ -1,0 +1,77 @@
+<div class="row">
+    <div class="row-centered">
+        <div class="col-md-12 col-centered">
+            We are proud to offer the animals below.  The majority of these animals were produced by us, unless where noted.  Regardless of their origin, they have all been very well cared for, and are backed up by our commitment to provide you with the very best post-purchase support, shoud you have any questions about your new critter.
+        </div>
+    </div>
+</div>
+
+<div ng-controller="Available as vm">
+
+    <div class="row">&nbsp;</div>
+
+    <div class="row row-centered">
+        <div class="col-md-5 col-centered">
+            <label>Show Only:</label>
+            <div class="btn-group" data-toggle="buttons">
+                <label class="btn btn-default" ng-click="status = ''">
+                    <input type="radio"> All
+                </label>
+                <label class="btn btn-default active" id="btnAvail"  ng-click="status = 'available'">
+                    <input type="radio"> Available
+                    <span class="badge">{{vm.forSale}}</span>
+                </label>
+                <label class="btn btn-default" ng-click="status = 'sold'">
+                    <input type="radio"> Sold
+                    <span ng-show="vm.sold > 0" class="badge">{{vm.sold}}</span>
+                </label>
+                <label class="btn btn-default {{vm.hold < 1 ? 'disabled' : ''}}" ng-click="status = 'payments'">
+                    <input type="radio"> On Hold
+                    <span ng-show="vm.hold > 0" class="badge">{{vm.hold}}</span>
+                </label>
+                <label class="btn btn-default {{vm.feeding < 1 ? 'disabled' : ''}}" ng-click="status = 'feeding'">
+                    <input type="radio"> Feeding Hold
+                    <span ng-show="vm.feeding > 0" class="badge">{{vm.feeding}}</span>
+                </label>
+            </div>
+       </div>
+    </div>
+
+    <div class="row">&nbsp;</div>
+
+    <ul class="grid">
+        <li ng-show="vm.noneAvailable && status == 'available'">
+            <div class="noneAvail">
+                Sorry, we have no animals available at this time!
+            </div>
+        </li>
+        <li ng-repeat="snake in vm.all | orderBy: 'status' | filter: { status: status }">
+            <div thumbnail class='thumbnail collectionThumbs'>
+                <div class="piclabels">
+                    <span class="label label-success" ng-show="snake.status == 'available'">AVAILABLE</span>
+                    <span class="label label-danger" ng-show="snake.status == 'sold'">SOLD</span>
+                    <span class="label label-warning" ng-show="snake.status == 'payments'">ON HOLD</span>
+                    <span class="label label-info" ng-show="snake.status == 'feeding'">FEEDING HOLD</span>
+                </div>
+                <a ui-sref="Detail({animalId: snake.id})">
+                    <div class="thumbhover">
+                        <h4>{{snake.name ? snake.name + ' (' + snake.id + ')' : snake.id}}</h4>
+                        <p>{{snake.description}}</p>
+                        <p>{{snake.species}} <span class="small">({{snake.speciesLatin}})</span></p>
+                        <p class="small">(click for details)</p>
+                    </div>
+                </a>
+                <div class="price" ng-show="snake.status != 'sold' && snake.status != 'payments' && snake.status != 'feeding'">
+                    <h4>
+                        <span class="label label-success">${{snake.price}}</span>
+                            <span ng-show="{{snake.includeShipping}}">shipped </span>
+                            <span ng-show="{{!snake.includeShipping}}">plus shipping </span>
+
+                        <a ui-sref="BuyNow({animalId: snake.id})" class="btn btn-primary">Buy Now</a>
+                    </h4>
+                </div>
+                <img src="/images/bodypics/{{snake.photos[0].filename}}.jpg"  class="photo img-responsive" style="max-height:250px;" alt="{{snake.photos[0].caption ? snake.photos[0].caption : snake.id}}">
+            </div>
+        </li>
+    </ul>
+</div>
