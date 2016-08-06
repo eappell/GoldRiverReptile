@@ -1,0 +1,153 @@
+<div class="list-group" ng-if="project.babies.length > 0">
+    <div class="list-group-item active">
+        <h4 class="list-group-item-heading">Offspring from Project {{project.id}}</h4>
+    </div>
+
+    <div class="row">
+        <div ng-repeat="snake in project.babies">
+                <div class="col-sm-4 col-md-3">
+                    <div thumbnail class='thumbnail collectionThumbs'>
+                        <a data-lightbox="{{project.id}}" title="Click to zoom" href="/images/bodypics/{{snake.photos[0].filename}}.jpg" ng-click="openLightboxModal($index)">
+                            <img src="/images/bodypics/{{snake.photos[0].filename}}.jpg" class="img-responsive photo" alt="{{snake.id}}" data-toggle="tooltip" data-container="body" title="Click to zoom" ng-class="{ fadedPhoto : snake.status == 'sold' }">
+                        </a>
+                        <div class="caption">
+							<h4>
+							    <div class="row">
+							        <div class="col-xs-6">
+								        {{snake.id}} 
+							        </div>
+							        <div class="col-xs-6 text-right" ng-show="{{snake.status == 'WaitingList' || snake.status == 'available'}}">
+								        ${{snake.price}}
+							        </div>
+							    </div>
+                                <span class="btn-group hide">
+                                    <a data-toggle="tooltip" data-placement="top" data-container="body" data-lightbox="{{snake.id}}" title="Click to zoom" href="/images/bodypics/{{snake.photos[0].filename}}.jpg" class="btn btn-primary btn-sm" ng-click="openLightboxModal($index)">
+                                        <i class="fa fa-search-plus"></i>
+                                    </a>
+                                    <a data-toggle="tooltip" data-placement="top" data-container="body" title="Click for details" ui-sref="Detail({animalId: snake.id})" class="btn btn-primary btn-sm">
+                                        <i class="glyphicon glyphicon-list-alt"></i>
+                                    </a>
+                                </span>
+							</h4>
+                            <h4>
+                               <span data-toggle="tooltip" title="Click for details">
+                                   <a class="btn btn-danger btn-sm" 
+                                      ng-show="snake.status == 'Hold'" 
+                                      data-toggle="modal" 
+                                      data-keyboard="true" 
+                                      data-target="#{{snake.id}}">
+                                       <i class="glyphicon glyphicon-list-alt" title="Click for details" data-toggle="tooltip"></i> 
+                                       <span style="font-weight:bold">HOLD BACK</span>
+                                   </a> 
+                                </span>
+                                <span data-toggle="tooltip" title="Click for details">
+                                    <a class="btn btn-success btn-sm" 
+                                       ng-show="snake.status == 'WaitingList' || snake.status == 'available'" 
+                                    data-toggle="modal" 
+                                    data-keyboard="true" 
+                                       data-target="#{{snake.id}}">
+                                        <i class="glyphicon glyphicon-list-alt" title="Click for details" data-toggle="tooltip"></i> 
+                                        <span style="font-weight:bold">AVAILABLE</span>
+                                   </a>
+                               </span> 
+                                <span data-toggle="tooltip" title="Click for details">
+                                    <a class="btn btn-danger btn-sm" 
+                                       ng-show="snake.status == 'sold'" 
+                                      data-toggle="modal" 
+                                    data-keyboard="true" 
+                                       data-target="#{{snake.id}}">
+                                        <i class="glyphicon glyphicon-list-alt" title="Click for details" data-toggle="tooltip"></i> 
+                                        <span style="font-weight:bold">SELECTED</span>
+                                   </a>
+                               </span> 
+                                <span data-toggle="tooltip" title="Click for details">
+                                    <a class="btn btn-warning btn-sm" 
+                                       ng-show="snake.status == 'payments'" 
+                                      data-toggle="modal" 
+                                    data-keyboard="true" 
+                                       data-target="#{{snake.id}}">
+                                        <i class="glyphicon glyphicon-list-alt" title="Click for details" data-toggle="tooltip"></i> 
+                                        <span style="font-weight:bold">ON HOLD</span>
+                                   </a>
+                               </span> 
+                                <span data-toggle="tooltip" title="Click for details">
+                                    <a class="btn btn-danger btn-sm" 
+                                       ng-show="snake.status == 'feeding'" 
+                                      data-toggle="modal" 
+                                    data-keyboard="true" 
+                                       data-target="#{{snake.id}}">
+                                        <i class="glyphicon glyphicon-list-alt" title="Click for details" data-toggle="tooltip"></i> 
+                                        <span style="font-weight:bold">FEEDING HOLD</span>
+                                   </a>
+                               </span> 
+                            </h4>
+                            
+                            <span class="label label-success" ng-show="snake.fullPinkiesTaken > 0" 
+                                data-toggle="tooltip" 
+                                title="Has had {{snake.fullPinkiesTaken}} full pinkie{{snake.fullPinkiesTaken > 1 ? 's' : ''}}" 
+                                data-container="body">
+                                <i class="icon-snakefoodmouse"></i> Eating ({{snake.fullPinkiesTaken}})
+                            </span>
+                            <span class="label label-default" 
+                                ng-show="snake.fullPinkiesTaken < 1" 
+                                data-toggle="tooltip" 
+                                title="Hasn't had at a full pinkie yet" 
+                                data-container="body">
+                                <i class="icon-snakefoodmouse"></i> Eating
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <!-- MODAL -->
+                <div id="{{snake.id}}" class="modal fade" tabindex="-1" role="dialog">
+                   <div class="modal-dialog">
+                       <div class="modal-content">
+                           <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                              <h4 class="modal-title">
+							    <div class="row">
+							        <div class="col-xs-7">
+								        {{snake.id}} 
+							        </div>
+							        <div class="col-xs-3">
+                                        <span class="label label-danger" ng-show="snake.status == 'Hold'">HOLD BACK</span> 
+                                        <span class="label label-success" ng-show="snake.status == 'WaitingList' || snake.status == 'available'">AVAILABLE FOR ${{snake.price}}</span> 
+                                        <span class="label label-primary" ng-show="snake.status == 'sold'">SELECTED</span> 
+                                        <span class="label label-warning" ng-show="snake.status == 'payments'">ON HOLD</span> 
+                                        <span class="label label-info" ng-show="snake.status == 'feeding'">FEEDING HOLD</span> 
+							        </div>
+							    </div>
+                              </h4>
+                           </div>
+                           <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <p ng-bind-html="snake.description | to_trusted"></p>
+                                        
+                                        <p ng-show="snake.fullPinkiesTaken > 0">
+                                            <i class="icon-snakefoodmouse"></i> <strong>Feeding Status:</strong>
+                                            This animal has eaten {{snake.fullPinkiesTaken}} full     pinkie{{snake.fullPinkiesTaken > 1 ? 's' : ''}} on it's own.
+                                        </p>
+                                        <p ng-show="snake.fullPinkiesTaken < 1">
+                                            <i class="icon-snakefoodmouse"></i> <strong>Feeding Status:</strong>
+                                            This animal has not yet eaten a full pinkie on it's own.
+                                        </p>
+                                    </div>
+                                    <div class="col-md-12">
+                                    <div ng-repeat="photo in snake.photos" thumbnail class="thumbnail col-sm-4">
+                                        <a href="/images/bodypics/{{photo.filename}}.jpg" data-lightbox="{{snake.id}}" data-title="{{photo.caption}}">
+                                            <img ng-src="/images/bodypics/{{photo.filename}}.jpg" data-toggle="tooltip" data-container="body" title="Click to zoom" alt="{{photo.caption ? photo.caption : photo.filename}}" style="margin:auto;" ng-click="openLightboxModal($index)">
+                                        </a>
+                                    </div>
+                                  </div>
+                              </div>                                                              
+                           </div>
+                           <div class="modal-footer">
+                               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                           </div>
+                       </div>
+                   </div>
+                </div>
+        </div>
+    </div>
+</div>

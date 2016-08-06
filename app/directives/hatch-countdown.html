@@ -1,0 +1,37 @@
+<div class="panel panel-success" ng-if="!project.isComplete">
+    <div class="panel-heading">
+        <h4 class="panel-title"><i class="ionicons ion-egg"></i> Hatch Date Countdown</h4>
+    </div>
+    <div class="panel-body">
+        <div>
+            <div class="btn-group hide" data-toggle="buttons">
+				<label class="btn btn-success active">
+					<input type="radio" ng-model="incubationPeriod" value="54"><i class="ionicons ion-egg"></i> 54 days
+				</label>
+				<label class="btn btn-success">
+					<input type="radio" ng-model="incubationPeriod" value="53"><i class="ionicons ion-egg"></i> 53 days
+				</label>
+				<label class="btn btn-success">
+					<input type="radio" ng-model="incubationPeriod" value="52"><i class="ionicons ion-egg"></i> 52 days
+				</label>
+				<label class="btn btn-success">
+					<input type="radio" ng-model="incubationPeriod" value="51"><i class="ionicons ion-egg"></i> 51 days
+				</label>
+				<label class="btn btn-success">
+					<input type="radio" ng-model="incubationPeriod" value="50"><i class="ionicons ion-egg"></i> 50 days
+				</label>
+            </div>
+            <h2 style="margin-top:0;">
+				Today is day {{project.daysPassed}}
+			</h2>
+            <h2 style="margin-top:15px;">
+				Expected Hatch Date: {{project.expectedHatchDate ? project.expectedHatchDate : project.eggsLaidDate | amAdd : incubationPeriod : project.incubationPeriod | amDateFormat: 'MMM D,YYYY'}}</h2>
+		</div>
+        <h2 style="margin-top:15px;" ng-if="project.daysToGo > 0">
+            <i class="fa fa-spin fa-circle-o-notch fa-lg"></i> Only {{project.daysToGo > 1 ? project.daysToGo + ' Days' : project.daysToGo + ' More Day'}} To Go!
+        </h2>
+        <h2 ng-if="project.daysToGo < 1">
+            <i class="fa fa-spin fa-circle-o-notch fa-lg"></i> Should be hatching any minute now!
+        </h2>
+   </div>
+</div>

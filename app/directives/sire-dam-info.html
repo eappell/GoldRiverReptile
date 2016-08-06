@@ -1,0 +1,28 @@
+<div class="col-md-6">
+    <div thumbnail class="thumbnail">
+        <a ui-sref="Detail({animalId: project.dam.id})">
+            <div class="thumbhover">
+               <p ng-bind-html="project.dam.shortDesc | to_trusted"></p>
+               <p class="bottom-aligned-text btn btn-primary btn-sm">click for details</p>
+            </div>
+        </a>
+       <img src="/images/bodypics/{{project.dam.photos[0].filename}}.jpg" class="photo" alt="{{project.dam.photos[0].caption}}" />
+       <div class="caption">
+           <h4>DAM: {{project.dam.name}}</h4>
+       </div>
+    </div>
+</div>
+<div class="col-md-6">
+       <div class="thumbnail" thumbnail>
+        <a ui-sref="Detail({animalId: project.sire.id})">
+           <div class="thumbhover">
+               <p ng-bind-html="project.sire.shortDesc | to_trusted"></p>
+               <p class="bottom-aligned-text btn btn-primary btn-sm">click for details</p>
+            </div>
+        </a>
+       <img src="/images/bodypics/{{project.sire.photos[0].filename}}.jpg" alt="{{project.sire.photos[0].caption}}" />
+       <div class="caption">
+           <h4>SIRE: {{project.sire.name}}</h4>
+        </div>
+    </div>
+</div>

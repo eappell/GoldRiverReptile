@@ -1,0 +1,50 @@
+<div class="projectInfo panel panel-info">
+    <div class="panel-heading">
+        <h4 class="panel-title">Project Stats</h4>
+    </div>
+    <div class="panel-body">
+        <button type="button" class="btn btn-primary btn-sm hide" ng-click="vm.showForm()">
+            I'm interested in this project
+        </button>
+        <div class="container-fluid" ng-if="!project.isComplete || project.eggs.count > 0">
+            <div class="row">
+                <div class="col-sm-7"><label>Eggs Laid Date</label></div>
+                <div class="col-md-5">{{project.eggsLaidDate | date:'mediumDate'}}</div>
+            </div>
+            <div class="row">
+                <div class="col-sm-7" ng-if="!project.isComplete"><label>Incubation Period</label></div>
+                <div class="col-sm-7" ng-if="project.isComplete && project.eggs.count > 0">
+                    <label>Eggs Hatched On</label>
+                </div>
+                <!--<div class="col-md-6">{{project.incubationPeriod}} days</div>-->
+                <div class="col-md-5">
+                    <incubation-period project="project" period="52"></incubation-period>
+                </div>
+            </div>
+            <div class="row" ng-if="!project.isComplete">
+                <div class="col-sm-7"><label>Expected Hatch Date</label></div>
+                <div class="col-md-5">{{project.expectedHatchDate | date:'mediumDate'}}</div>
+            </div>
+            <div class="row">
+                <div class="col-sm-7"><label>Actual Hatch Date</label></div>
+                <div class="col-md-5">{{project.actualHatchDate | date:'mediumDate'}}</div>
+            </div>
+            <div class="row">
+                <div class="col-sm-7"><label>Eggs Laid</label></div>
+                <div class="col-md-5">{{project.eggs.count}}</div>
+            </div>
+            <div class="row">
+                <div class="col-sm-7"><label>Eggs Fertile</label></div>
+                <div class="col-md-5">{{project.eggs.fertile}}</div>
+            </div>
+            <div class="row">
+                <div class="col-sm-7"><label>Eggs Hatched</label></div>
+                <div class="col-md-5">{{project.eggs.hatched}}</div>
+            </div>
+        </div>
+        <div class="container-fluid"ng-if="project.isComplete && project.eggs.count < 1">
+            <span class="label label-danger">NO EGGS</span>
+            Female never laid eggs, project ended.
+        </div>
+      </div>
+</div>

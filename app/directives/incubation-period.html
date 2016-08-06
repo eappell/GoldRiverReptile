@@ -1,0 +1,17 @@
+<div>
+    <div ng-if="project.isComplete || project.eggs.count < 1">
+        {{'Day ' + project.actualIncubationDays}}
+    </div>
+
+    <div class="span0 votingWidget" ng-if="!project.isComplete || project.eggs.count < 1">
+        <span class="votingButton" ng-click="decreasePeriod()">
+            <i class="fa fa-chevron-left"></i>
+        </span>
+        <div class="badge">
+            <div>{{period}} days</div>
+        </div>
+        <span class="votingButton" ng-click="increasePeriod()">
+            <i class="fa fa-chevron-right icon-white"></i>
+        </span>
+    </div>
+</div>

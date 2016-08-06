@@ -1,0 +1,39 @@
+<div class="list-group" ng-if="project.babies.length > 0">
+    <div class="list-group-item active">
+        <h4 class="list-group-item-heading">Offspring</h4>
+    </div>
+
+    <div class="row"><!-- filter { sex: filter.sex, species: filter.species } |  -->
+        <p></p>
+        <div ng-repeat="snake in project.babies">
+                <div class="col-sm-6 col-md-4">
+                    <div thumbnail class='thumbnail collectionThumbs'>
+						<div class="thumbhover" tooltip="View {{neonate.id}} Details">
+							<h5>
+								{{snake.name ? snake.name + ' (' + snake.id + ')' : snake.id}}
+                                <span class="btn-group">
+                                    <a data-lightbox="{{project.id}}" title="Click to zoom" href="/images/bodypics/{{snake.photos[0].filename}}.jpg" class="btn btn-primary btn-xs" ng-click="openLightboxModal($index)">
+                                        <i class="fa fa-search-plus"></i>
+                                    </a>
+                                    <a ui-sref="Detail({animalId: snake.id})" title="Click for details" class="btn btn-primary btn-xs">
+                                        <i class="fa fa-file-text-o"></i>
+                                    </a>
+                                </span>
+							</h5>
+							<p class="small">
+								{{snake.shortDesc}}
+							</p>
+						</div>
+                        <img src="/images/bodypics/{{snake.photos[0].filename}}.jpg" class="img-responsive photo" alt="{{snake.id}}">
+                    </div>
+                    <div class="OffspringLabels hide">
+                        <span class="label label-danger" ng-show="snake.status == 'deceased'">DECEASED</span>
+                        <span class="label label-primary" ng-show="snake.status == 'sold'">SOLD</span>
+                        <span class="label label-warning" ng-show="snake.status == 'payments'">ON HOLD</span>
+                        <span class="label label-info" ng-show="snake.status == 'feeding'">FEEDING HOLD</span>
+                        <span class="label label-success" ng-show="snake.price > 0 && snake.status != 'payments' && snake.status != 'sold'">AVAILABLE</span>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
